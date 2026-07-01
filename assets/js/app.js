@@ -37,11 +37,19 @@
     el.style.setProperty("--pct", pct + "%");
   }
 
+  // Единый источник истины — введённое число (с зажимом в диапазон).
+  // Слайдер с крупным шагом «примагничивает» значение, поэтому считаем
+  // именно по числу из поля, а к range откатываемся, только если поле пустое.
+  function fieldValue(f) {
+    var raw = parseInt(document.getElementById(f.num).value, 10);
+    if (isNaN(raw)) raw = Number(document.getElementById(f.range).value);
+    return clamp(raw, f.min, f.max);
+  }
   function currentValues() {
     return {
-      cards: Number(document.getElementById("cardsRange").value),
-      check: Number(document.getElementById("checkRange").value),
-      share: Number(document.getElementById("shareRange").value)
+      cards: fieldValue(fields[0]),
+      check: fieldValue(fields[1]),
+      share: fieldValue(fields[2])
     };
   }
 
@@ -100,7 +108,9 @@
       var target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Уважаем «уменьшить движение»: без анимированного скролла.
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
       history.replaceState(null, "", id);
     });
   });
