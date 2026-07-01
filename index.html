@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Народный реактив — возвращаем ваших пациентов из базы клиники</title>
+  <meta name="description" content="«Народный реактив» находит в базе вашей стоматологической клиники спящих пациентов и по-человечески возвращает их. Без рекламного бюджета — работаем со своими. Проект MMDV." />
+  <meta name="theme-color" content="#160B07" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Народный реактив — ваши пациенты никуда не делись" />
+  <meta property="og:description" content="Находим в базе клиники тех, кто давно не был, и по-человечески возвращаем обратно. Без рекламного бюджета." />
+  <meta property="og:locale" content="ru_RU" />
+
+  <!-- Fonts: Alegreya (serif headings) + Alegreya Sans (body/UI), Cyrillic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,500&family=Alegreya+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Original inline emblem as favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%23160B07'/%3E%3Cpath d='M24 7 L27.5 20.5 L41 24 L27.5 27.5 L24 41 L20.5 27.5 L7 24 L20.5 20.5 Z' fill='%23C9A24B'/%3E%3Cpath d='M24 20 l4 4 l-4 4 l-4 -4 z' fill='%237E1A16'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- ============ ORIGINAL SVG ASSET DEFS (reused across page) ============ -->
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute" focusable="false">
+    <defs>
+      <!-- Warm grain -->
+      <filter id="grain">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n" />
+        <feColorMatrix in="n" type="saturate" values="0" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Reusable emblem symbol: catalyst spark + oxblood diamond -->
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute" focusable="false">
+    <symbol id="emblem" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".55" />
+      <path d="M24 6 L27.6 20.4 L42 24 L27.6 27.6 L24 42 L20.4 27.6 L6 24 L20.4 20.4 Z" fill="currentColor" />
+      <path d="M24 19.5 l4.5 4.5 l-4.5 4.5 l-4.5 -4.5 z" fill="var(--oxblood)" />
+    </symbol>
+
+    <!-- Minimal, non-cartoon bear head — MMDV family mark -->
+    <symbol id="bear" viewBox="0 0 64 64">
+      <g fill="currentColor">
+        <path d="M18 16c-4 0-7 3-7 7 0 3 2 5 4 6-1 2-1 4-1 6 0 11 8 19 18 19s18-8 18-19c0-2 0-4-1-6 2-1 4-3 4-6 0-4-3-7-7-7-2 0-4 1-5 2-2-1-5-2-9-2s-7 1-9 2c-1-1-3-2-5-2Zm0 5c1 0 2 .4 3 1-1 2-1 4-2 6-1-1-3-2-3-4 0-2 1-3 2-3Zm28 0c1 0 2 1 2 3 0 2-2 3-3 4-1-2-1-4-2-6 1-.6 2-1 3-1Z" />
+      </g>
+      <g fill="var(--ink)">
+        <ellipse cx="25" cy="34" rx="2.4" ry="3" />
+        <ellipse cx="39" cy="34" rx="2.4" ry="3" />
+        <path d="M32 40c-3 0-5 2-5 4 0 3 2 5 5 5s5-2 5-5c0-2-2-4-5-4Z" opacity=".92" />
+      </g>
+      <path d="M32 41.5c1.6 0 3 1.2 3 2.6 0 1.6-1.4 2.9-3 2.9s-3-1.3-3-2.9c0-1.4 1.4-2.6 3-2.6Z" fill="currentColor" opacity=".35" />
+    </symbol>
+  </svg>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="#top" aria-label="Народный реактив — на главную">
+        <svg class="wordmark__mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#emblem" /></svg>
+        <span class="wordmark__text">
+          <span class="wordmark__line1">Народный</span>
+          <span class="wordmark__line2">реактив</span>
+        </span>
+      </a>
+      <a class="btn btn--ember btn--sm" href="https://t.me/mmdv_ai" target="_blank" rel="noopener">
+        <svg class="ico-tg" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 2.7 11.7c-1 .4-1 1.8 0 2.1l4.8 1.5 1.8 5.7c.3.8 1.3 1 1.9.4l2.6-2.5 4.8 3.5c.7.5 1.7.1 1.9-.7l3.3-15.6c.2-1-.8-1.8-1.7-1.3ZM9.7 15.1l-.4 4.1-1.3-4 8.6-6.6-6.9 6.5Z" fill="currentColor"/></svg>
+        Telegram
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= SCREEN 1 · HERO ================= -->
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">Народный реактив · проект MMDV</p>
+          <h1 class="hero__title">Ваши пациенты никуда не&nbsp;делись. Они просто перестали приходить.</h1>
+          <p class="lead">
+            «Народный реактив» находит в базе вашей клиники тех, кто давно не был, и&nbsp;по-человечески возвращает их обратно. Без рекламного бюджета — работаем со&nbsp;своими, кто вас уже знает и уже вам доверял.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn--ember" href="#calc">Посчитать, сколько спит в моей базе</a>
+            <a class="btn btn--ghost" href="https://t.me/mmdv_ai" target="_blank" rel="noopener">Написать в Telegram</a>
+          </div>
+          <p class="micro-note">Не гоняемся за новыми. Возвращаем ваших.</p>
+        </div>
+
+        <aside class="hero__card" aria-label="Пример расчёта по базе">
+          <p class="hero__card-title">В вашей базе сейчас</p>
+
+          <div class="stat">
+            <div class="stat__row">
+              <span class="stat__label">Пациентов в базе</span>
+              <span class="stat__val">2&nbsp;000</span>
+            </div>
+            <div class="bar"><span class="bar__fill" style="width:100%"></span></div>
+          </div>
+
+          <div class="stat">
+            <div class="stat__row">
+              <span class="stat__label">Не были 8–12 месяцев</span>
+              <span class="stat__val">1&nbsp;200</span>
+            </div>
+            <div class="bar"><span class="bar__fill bar__fill--dim" style="width:60%"></span></div>
+          </div>
+
+          <div class="hero__card-foot">
+            <p class="hero__card-foot-label">Можно вернуть с первой волны</p>
+            <p class="hero__card-foot-val">≈&nbsp;240&nbsp;000&nbsp;₽</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="wrap"><hr class="hairline" /></div>
+
+    <!-- ================= SCREEN 2 · ПРОБЛЕМА ================= -->
+    <section class="section section--light" id="problema">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--deep">Потерянные деньги</p>
+        <h2 class="section__title">У средней клиники 60–80% базы молчит. Это не «мёртвые контакты» — это запертый сундук с деньгами.</h2>
+
+        <div class="cards cards--3">
+          <article class="fact-card">
+            <p class="fact-card__num">1 500–5 000&nbsp;₽</p>
+            <p class="fact-card__text">Столько стоит один новый пациент с рекламы. И ещё не факт, что он дойдёт до кресла.</p>
+          </article>
+          <article class="fact-card">
+            <p class="fact-card__num">≈ 0&nbsp;₽</p>
+            <p class="fact-card__text">Столько стоит вернуть того, кто у вас уже лечился. Доверие он вам уже заплатил.</p>
+          </article>
+          <article class="fact-card">
+            <p class="fact-card__num fact-card__num--word">Почти у&nbsp;каждого</p>
+            <p class="fact-card__text">Есть честный повод вернуться: чистка раз в полгода, недолеченный зуб, плановый осмотр.</p>
+          </article>
+        </div>
+
+        <p class="closing-line">Вы платите за чужих, пока свои лежат в базе без дела.</p>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 3 · КАК РАБОТАЕТ ================= -->
+    <section class="section" id="kak">
+      <div class="wrap">
+        <p class="eyebrow">Как это работает</p>
+        <h2 class="section__title">Три шага — и ваши люди снова в&nbsp;кресле</h2>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num">01</span>
+            <div class="step__body">
+              <h3 class="step__head">Открываем вашу базу</h3>
+              <p class="step__text">Берём выгрузку из вашей CRM (IDENT, Dental4Windows, 1С, даже Excel). База остаётся у вас — ничего никуда не уходит.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">02</span>
+            <div class="step__body">
+              <h3 class="step__head">Находим своих</h3>
+              <p class="step__text">Отбираем тех, кто не был 8–12 месяцев и дольше. Делим по-людски: кто не долечил, кто был на чистке год назад, кто заходил разово. Каждому — свой повод, а не «АКЦИЯ СКИДКА».</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">03</span>
+            <div class="step__body">
+              <h3 class="step__head">Зовём домой</h3>
+              <p class="step__text">Пишем от лица вашей клиники, тёплым человеческим языком. Пациент записывается — вы видите отчёт в живых деньгах.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="trust">
+          <span class="seal" aria-hidden="true">
+            <svg viewBox="0 0 128 128">
+              <defs>
+                <path id="sealArcTop" d="M64 64 m 0 -50 a 50 50 0 1 1 -0.01 0" />
+              </defs>
+              <circle cx="64" cy="64" r="60" fill="none" stroke="var(--gold)" stroke-width="1" opacity=".5" />
+              <circle cx="64" cy="64" r="50" fill="none" stroke="var(--gold)" stroke-width="2.4" />
+              <text class="seal__ring" font-size="8.8">
+                <textPath href="#sealArcTop" startOffset="0" textLength="300" lengthAdjust="spacingAndGlyphs">· НАРОДНЫЙ РЕАКТИВ · ЗАКРЫТЫЙ КОНТУР</textPath>
+              </text>
+              <use href="#emblem" x="40" y="40" width="48" height="48" />
+            </svg>
+          </span>
+          <p class="trust__text">Ваша база не уходит в чужие нейросети. Работаем в закрытом контуре.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap"><hr class="hairline" /></div>
+
+    <!-- ================= SCREEN 4 · КАЛЬКУЛЯТОР ================= -->
+    <section class="section section--calc" id="calc">
+      <div class="wrap">
+        <p class="eyebrow">Счёт на ваших цифрах</p>
+        <h2 class="section__title">Посчитайте, сколько денег спит в&nbsp;вашей базе</h2>
+
+        <div class="calc">
+          <form class="calc__controls" id="calcForm" novalidate>
+            <div class="field">
+              <div class="field__top">
+                <label class="field__label" for="cardsNum">Карточек пациентов в базе</label>
+                <input class="field__num" id="cardsNum" type="number" inputmode="numeric" min="200" max="20000" step="100" value="2000" />
+              </div>
+              <input class="range" id="cardsRange" type="range" min="200" max="20000" step="100" value="2000" aria-label="Карточек пациентов в базе" />
+            </div>
+
+            <div class="field">
+              <div class="field__top">
+                <label class="field__label" for="checkNum">Средний чек визита, ₽</label>
+                <input class="field__num" id="checkNum" type="number" inputmode="numeric" min="1000" max="20000" step="100" value="4000" />
+              </div>
+              <input class="range" id="checkRange" type="range" min="1000" max="20000" step="100" value="4000" aria-label="Средний чек визита, рублей" />
+            </div>
+
+            <div class="field">
+              <div class="field__top">
+                <label class="field__label" for="shareNum">Доля молчащих, %</label>
+                <input class="field__num" id="shareNum" type="number" inputmode="numeric" min="0" max="100" step="1" value="60" />
+              </div>
+              <input class="range" id="shareRange" type="range" min="0" max="100" step="1" value="60" aria-label="Доля молчащих, процентов" />
+            </div>
+          </form>
+
+          <div class="calc__result" aria-live="polite">
+            <div class="calc__mini">
+              <div class="calc__mini-item">
+                <span class="calc__mini-label">Спящих в базе</span>
+                <span class="calc__mini-val" id="outSleeping">1&nbsp;200</span>
+              </div>
+              <div class="calc__mini-item">
+                <span class="calc__mini-label">Вернётся с первой волны</span>
+                <span class="calc__mini-val" id="outReturn">60</span>
+              </div>
+            </div>
+
+            <p class="calc__result-label">можно вернуть с первой же волны</p>
+            <p class="calc__result-big"><span id="outRevenue">240&nbsp;000</span>&nbsp;₽</p>
+            <p class="calc__hint">по практике возвращается 4–7%</p>
+
+            <p class="calc__sub">И это только первый визит. Чистки и лечение тянут за собой следующие — на деле выходит больше.</p>
+            <a class="btn btn--ember btn--wide" href="https://t.me/mmdv_ai" target="_blank" rel="noopener">Хочу точный расчёт по моей реальной базе — бесплатно</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 5 · ВОЗРАЖЕНИЯ ================= -->
+    <section class="section section--light" id="voprosy">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--deep">Что обычно спрашивают</p>
+        <h2 class="section__title">Спрашивайте прямо — отвечаем честно</h2>
+
+        <div class="qa">
+          <details class="qa__item" open>
+            <summary class="qa__q">«Это не спам?»</summary>
+            <p class="qa__a">Сообщения личные, от лица вашей клиники, с реальным поводом. Человек вас знает — это не холодная рассылка чужим.</p>
+          </details>
+          <details class="qa__item">
+            <summary class="qa__q">«Данные не утекут?»</summary>
+            <p class="qa__a">База не уходит в сторонние сервисы и нейросети. Закрытый контур, доступ — только у вас и у нас. Работаем по договору.</p>
+          </details>
+          <details class="qa__item">
+            <summary class="qa__q">«А вдруг не сработает?»</summary>
+            <p class="qa__a">Сначала бесплатно разбираем базу и показываем конкретные цифры. Платите, только когда видите, что там есть что возвращать.</p>
+          </details>
+          <details class="qa__item">
+            <summary class="qa__q">«Это долго и муторно?»</summary>
+            <p class="qa__a">Запуск за несколько дней. От вас — одна выгрузка базы. Остальное на нас.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 6 · ТАРИФЫ ================= -->
+    <section class="section" id="ceny">
+      <div class="wrap">
+        <p class="eyebrow">Цены сразу</p>
+        <h2 class="section__title">Понятные условия. Всё на виду, без&nbsp;мелкого шрифта.</h2>
+
+        <div class="cards cards--3 tiers">
+          <article class="tier tier--featured">
+            <span class="tier__flag">Начните здесь</span>
+            <h3 class="tier__name">Разбор базы</h3>
+            <p class="tier__price">Бесплатно</p>
+            <p class="tier__text">Выгружаем, считаем, показываем ваши реальные цифры. Без обязательств.</p>
+            <a class="btn btn--ember btn--wide" href="https://t.me/mmdv_ai" target="_blank" rel="noopener">Telegram</a>
+          </article>
+
+          <article class="tier">
+            <h3 class="tier__name">Запуск</h3>
+            <p class="tier__price">от 80&nbsp;000&nbsp;₽</p>
+            <p class="tier__text">Настройка системы под вашу базу и CRM. Можно оплатить 50/50.</p>
+            <a class="btn btn--ghost btn--wide" href="https://t.me/mmdv_ai" target="_blank" rel="noopener">Обсудить запуск</a>
+          </article>
+
+          <article class="tier">
+            <h3 class="tier__name">Ведение</h3>
+            <p class="tier__price">от 30&nbsp;000&nbsp;₽<span class="tier__per">/мес</span></p>
+            <p class="tier__text">Регулярные волны реактивации + ежемесячный отчёт в деньгах. Без долгих контрактов — остановить можно когда угодно.</p>
+            <a class="btn btn--ghost btn--wide" href="https://t.me/mmdv_ai" target="_blank" rel="noopener">Обсудить ведение</a>
+          </article>
+        </div>
+
+        <p class="micro-note micro-note--center">Никаких скрытых процентов и мелкого шрифта. Что видите — то и платите.</p>
+      </div>
+    </section>
+
+    <div class="wrap"><hr class="hairline" /></div>
+
+    <!-- ================= SCREEN 7 · ФИНАЛ ================= -->
+    <section class="section section--final" id="start">
+      <div class="wrap final">
+        <p class="eyebrow">Первый шаг</p>
+        <h2 class="final__title">Начнём с бесплатного разбора вашей&nbsp;базы</h2>
+        <p class="final__lead">Одно сообщение — и вы узнаете, сколько своих денег спит в вашей базе прямо сейчас.</p>
+        <a class="btn btn--ember btn--lg" href="https://t.me/mmdv_ai" target="_blank" rel="noopener">Написать в Telegram</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer__brand">
+        <a class="wordmark wordmark--foot" href="#top" aria-label="Народный реактив">
+          <svg class="wordmark__mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#emblem" /></svg>
+          <span class="wordmark__text">
+            <span class="wordmark__line1">Народный</span>
+            <span class="wordmark__line2">реактив</span>
+          </span>
+        </a>
+        <svg class="bear-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#bear" /></svg>
+      </div>
+      <p class="footer__meta">
+        <span>проект MMDV</span>
+        <span class="footer__dot">·</span>
+        <a href="https://t.me/mmdv_ai" target="_blank" rel="noopener">Telegram: @mmdv_ai</a>
+        <span class="footer__dot">·</span>
+        <span>© 2026</span>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>
