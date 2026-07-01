@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Plus } from "lucide-react";
 import { Section } from "@/components/ui/Section";
@@ -28,6 +28,7 @@ const qa = [
 
 function Item({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
+  const panelId = useId();
 
   return (
     <RevealItem className="overflow-hidden rounded-card border border-gold-500/25 bg-scarlet-900/40">
@@ -36,6 +37,7 @@ function Item({ q, a }: { q: string; a: string }) {
           type="button"
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
+          aria-controls={panelId}
           className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-display text-[18px] font-bold text-cream transition-colors hover:text-gold-300 sm:px-6"
         >
           <span>«{q}»</span>
@@ -53,6 +55,7 @@ function Item({ q, a }: { q: string; a: string }) {
         {open && (
           <motion.div
             key="content"
+            id={panelId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}

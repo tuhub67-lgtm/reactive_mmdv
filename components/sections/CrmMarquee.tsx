@@ -16,7 +16,7 @@ export function CrmMarquee() {
         {items.map((name, i) => (
           <span
             key={`${name}-${i}`}
-            className="flex items-center gap-2 whitespace-nowrap font-body text-[15px] font-medium text-ink/55"
+            className="flex items-center gap-2 whitespace-nowrap font-body text-[15px] font-medium text-ink/75"
           >
             <Database className="h-4 w-4 text-gold-700" strokeWidth={1.7} aria-hidden="true" />
             {name}

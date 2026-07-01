@@ -47,7 +47,7 @@ export function Pricing() {
             key={t.name}
             className={`relative flex flex-col rounded-xl2 p-7 transition-transform duration-300 hover:-translate-y-1 ${
               t.featured
-                ? "border-2 border-gold-500 bg-white shadow-lift"
+                ? "border-2 border-gold-500 bg-cream shadow-lift"
                 : "border border-gold-700/25 bg-parchment-deep/60 shadow-warm"
             }`}
           >

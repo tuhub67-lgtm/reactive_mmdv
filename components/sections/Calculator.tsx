@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Cartouche } from "@/components/ornament/Cartouche";
 import { Corners } from "@/components/ornament/Corners";
 import { CountUp } from "@/components/ui/CountUp";
-import { clamp, formatRu, formatRub } from "@/lib/format";
+import { clamp, formatRu } from "@/lib/format";
 import { TELEGRAM_URL } from "@/lib/constants";
 
 const RETURN_RATE = 0.05; // по практике возвращается 4–7% → берём 5%
@@ -45,7 +45,13 @@ function Field({
     setBuf(raw);
     const n = parseInt(raw, 10);
     if (raw === "" || Number.isNaN(n)) return; // не мешаем печатать
-    onChange(clamp(n, 0, cfg.max)); // считаем по введённому (низ докручиваем на blur)
+    // Пока введённое число меньше минимума — это ещё не завершённый ввод
+    // (например, набирают «2050», а промежуточно там «2» или «20»).
+    // Не двигаем слайдер/результат на нижнюю границу от каждой такой цифры —
+    // ждём, пока число станет осмысленным, иначе слайдер дёргается к min.
+    // Сверху всё же ограничиваем, чтобы явно большие числа не улетали за max.
+    if (n < cfg.min) return;
+    onChange(clamp(n, cfg.min, cfg.max));
   };
   const onBlur = () => {
     const n = parseInt(buf, 10);
@@ -165,7 +171,11 @@ export function Calculator() {
               <p className="font-body text-[13px] font-semibold uppercase tracking-[0.12em] text-gold-700">
                 Можно вернуть с первой же волны
               </p>
-              <p className="mt-2 leading-none text-scarlet-700">
+              <p
+                className="mt-2 leading-none text-scarlet-700"
+                aria-live="polite"
+                aria-atomic="true"
+              >
                 <span className="font-display text-[18px] font-bold align-top">≈ </span>
                 <span className="font-display font-extrabold tabular-nums text-[clamp(40px,9vw,68px)] text-gold-700">
                   <CountUp value={revenue} format={formatRu} />

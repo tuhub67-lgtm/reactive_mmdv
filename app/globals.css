@@ -29,6 +29,12 @@
     scroll-behavior: smooth;
   }
 
+  /* Запас под липкую шапку для любых якорных переходов, включая те, что
+     идут в обход SmoothScroll.tsx (восстановление #hash браузером и т.п.). */
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+
   /* Lenis управляет скроллом сам */
   .lenis.lenis-smooth {
     scroll-behavior: auto !important;

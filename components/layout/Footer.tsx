@@ -3,7 +3,9 @@ import { TELEGRAM_URL, TELEGRAM_HANDLE } from "@/lib/constants";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-gold-500/20 bg-scarlet-900 py-10 text-cream">
+    // Доп. отступ снизу на мобильном — под липкую CTA-кнопку (MobileCta),
+    // чтобы она не перекрывала ссылку @mmdv_ai и «© 2026».
+    <footer className="relative border-t border-gold-500/20 bg-scarlet-900 pb-[104px] pt-10 text-cream sm:pb-10">
       <div className="container-x flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
           {/* СЛОТ ПОД ЛОГОТИП-МЕДВЕДЬ — см. Wordmark.tsx */}

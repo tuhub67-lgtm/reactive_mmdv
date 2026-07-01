@@ -46,7 +46,7 @@ export function Header() {
         </nav>
 
         <div className="hidden sm:block">
-          <Button href={TELEGRAM_URL} variant="cta" className="min-h-[44px] px-5 py-2 text-[15px]">
+          <Button href={TELEGRAM_URL} variant="cta">
             Бесплатный разбор
           </Button>
         </div>
