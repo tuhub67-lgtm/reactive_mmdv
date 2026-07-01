@@ -1,0 +1,30 @@
+{
+  "name": "narodniy-reaktiv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Лендинг «Народный реактив» — реактивация спящих пациентов стоматологий (проект MMDV)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "gsap": "3.12.7",
+    "lenis": "1.1.18",
+    "lucide-react": "0.469.0",
+    "motion": "^12.42.2",
+    "next": "15.1.6",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.12",
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.4.49",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.7.3"
+  }
+}
